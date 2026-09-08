@@ -4,12 +4,14 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
+    "typecheck": "tsc --noEmit",
     "task1": "npm run build && node dist/task1.js",
     "task2": "npm run build && node dist/task2.js",
     "task3": "npm run build && node dist/task3.js",
     "format": "prettier --write .",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "prepare": "husky"
   },
   "author": "",
   "license": "ISC",
@@ -19,9 +21,14 @@
     "eslint": "^9.39.2",
     "eslint-plugin-prettier": "^5.5.5",
     "globals": "^17.0.0",
+    "husky": "^9.1.7",
     "jiti": "^2.6.1",
     "prettier": "^3.8.0",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.53.1"
+  },
+  "lint-staged": {
+    "*.{ts,tsx}": "eslint --fix",
+    "*.{ts,tsx,css,scss,json,md,html}": "prettier --write"
   }
 }
