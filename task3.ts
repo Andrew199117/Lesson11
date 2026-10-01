@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
 // Написать функции loadTodos, которая принимает массив todo и возвращает массив id, если же запрос упал, тогда возвращает null
 
 interface Todo {
@@ -16,8 +15,18 @@ async function loadTodo(num: number): Promise<Todo | null> {
 
     return result;
   }
-
   return null;
 }
+async function loadTodos(todos: number[]) {
+  const promises = todos.map((id) => loadTodo(id));
+  const results = await Promise.all(promises);
+  return results.map((todo) => {
+    if (todo === null) {
+      return null;
+    }
+    return todo.id;
+  });
+}
+loadTodos([1, 2, 3]).then((result) => console.log(result));
 
 // loadTodos([1, 2, 3]).then((result) => console.log(result)); // [1, 2, 3] или [1, null, 3]
